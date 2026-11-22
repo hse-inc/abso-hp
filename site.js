@@ -61,6 +61,11 @@
     par.forEach((el, k) => { const r = el.getBoundingClientRect(); const d = (r.top + r.height / 2 - innerHeight / 2) / innerHeight; el.style.setProperty('--py', `${(d * (k % 2 ? -14 : 12)).toFixed(1)}px`); });
   };
   addEventListener('scroll', () => requestAnimationFrame(onS), { passive: true }); onS();
+  const slides = [...document.querySelectorAll('.fv__photo img')];
+  if (slides.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let cur = 0;
+    setTimeout(() => setInterval(() => { slides[cur].classList.remove('is-cur'); cur = (cur + 1) % slides.length; slides[cur].classList.add('is-cur'); }, 4500), 3000);
+  }
   const st = document.querySelector('.fv__stage');
   if (st && matchMedia('(hover: hover)').matches) st.addEventListener('mousemove', (e) => { const r = st.getBoundingClientRect(); st.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3)); st.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3)); });
   let n = 0;
