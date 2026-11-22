@@ -50,6 +50,11 @@
     };
     walk(line);
   });
+  const ecs = [];
+  document.querySelectorAll('.fv__en-l').forEach((w) => {
+    const t = w.textContent; w.textContent = '';
+    [...t].forEach((ch) => { const o = document.createElement('span'); o.className = 'fv__ec'; const i = document.createElement('span'); i.style.setProperty('--c', ecs.length); i.textContent = ch; o.appendChild(i); w.appendChild(o); ecs.push(o); });
+  });
   const stage = document.querySelector('.fv__stage');
   if (fv && stage) {
     const clamp = (v) => Math.min(1, Math.max(0, v));
@@ -64,6 +69,9 @@
       fv.classList.toggle('is-msg', p2 > 0.6 && p3 < 0.4);
       fv.classList.toggle('is-salon', p4 > 0.6);
       fv.classList.toggle('is-msg-still', p3 === 0);
+      fv.classList.toggle('is-rest', p1 === 0);
+      const nE = ecs.length || 1;
+      ecs.forEach((e, k) => e.style.setProperty('--o', clamp(1 - (p1 * 1.8 - (k / nE) * 0.8)).toFixed(3)));
     };
     window.addEventListener('scroll', () => requestAnimationFrame(tick), { passive: true });
     tick();
