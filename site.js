@@ -47,7 +47,22 @@
     });
   }, { rootMargin: '0px 0px -8% 0px' });
   document.querySelectorAll('.pic, .deco, .ttl2__en').forEach((el) => io2.observe(el));
-  document.querySelectorAll('.ttl2__en').forEach((t) => t.querySelectorAll('.mask').forEach((m, i) => m.style.setProperty('--m', i)));
+  document.querySelectorAll('.ttl2__en').forEach((t) => t.querySelectorAll('.mask').forEach((m, i) => {
+    m.style.setProperty('--m', i);
+    const sp = m.firstElementChild; const txt = sp.textContent; sp.textContent = '';
+    [...txt].forEach((ch, k) => { const e = document.createElement('span'); e.className = 'ch2'; e.style.setProperty('--i', k); e.textContent = ch; sp.appendChild(e); });
+    sp.style.transform = 'none';
+  }));
+  const bar = document.querySelector('.progress');
+  const par = [...document.querySelectorAll('.collage__b, .collage__c')];
+  const onS = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    if (bar) bar.style.setProperty('--sp', (max > 0 ? scrollY / max : 0).toFixed(4));
+    par.forEach((el, k) => { const r = el.getBoundingClientRect(); const d = (r.top + r.height / 2 - innerHeight / 2) / innerHeight; el.style.setProperty('--py', `${(d * (k % 2 ? -14 : 12)).toFixed(1)}px`); });
+  };
+  addEventListener('scroll', () => requestAnimationFrame(onS), { passive: true }); onS();
+  const st = document.querySelector('.fv__stage');
+  if (st && matchMedia('(hover: hover)').matches) st.addEventListener('mousemove', (e) => { const r = st.getBoundingClientRect(); st.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3)); st.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3)); });
   let n = 0;
   document.querySelectorAll('.fv__line').forEach((line) => {
     const walk = (node) => {
