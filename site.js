@@ -66,8 +66,19 @@
     let cur = 0;
     setTimeout(() => setInterval(() => { slides[cur].classList.remove('is-cur'); cur = (cur + 1) % slides.length; slides[cur].classList.add('is-cur'); }, 4500), 3000);
   }
+  const track = document.querySelector('.faces');
+  const dots = [...document.querySelectorAll('.faces__dots span')];
+  if (track && matchMedia('(max-width: 767px)').matches) {
+    const items = [...track.children]; let idx = 1, hold = 0;
+    const show = (i) => { idx = (i + items.length) % items.length; items.forEach((it, k) => it.classList.toggle('is-cur', k === idx)); dots.forEach((d, k) => d.classList.toggle('is-on', k === idx)); };
+    show(1);
+    track.addEventListener('touchstart', () => { hold = Date.now(); }, { passive: true });
+    let sx = 0; track.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', (e) => { const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) show(idx + (dx < 0 ? 1 : -1)); }, { passive: true });
+    setInterval(() => { if (Date.now() - hold > 6000) show(idx + 1); }, 3500);
+  }
   const st = document.querySelector('.fv__stage');
-  if (st && matchMedia('(hover: hover)').matches) st.addEventListener('mousemove', (e) => { const r = st.getBoundingClientRect(); st.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3)); st.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3)); });
+  if (st && matchMedia('(hover: hover) and (min-width: 960px)').matches) st.addEventListener('mousemove', (e) => { const r = st.getBoundingClientRect(); st.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3)); st.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3)); });
   let n = 0;
   document.querySelectorAll('.fv__line').forEach((line) => {
     const walk = (node) => {
