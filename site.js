@@ -37,6 +37,17 @@
 
   document.querySelectorAll('form[data-todo]').forEach((f) => f.addEventListener('submit', (e) => e.preventDefault()));
 
+  const io2 = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      const sibs = [...el.parentElement.children].filter((c) => c.classList.contains('pic') || c.classList.contains('deco'));
+      el.style.setProperty('--rv-delay', `${sibs.indexOf(el) * 0.15}s`);
+      el.classList.add('is-on'); io2.unobserve(el);
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.pic, .deco, .ttl2__en').forEach((el) => io2.observe(el));
+  document.querySelectorAll('.ttl2__en').forEach((t) => t.querySelectorAll('.mask').forEach((m, i) => m.style.setProperty('--m', i)));
   let n = 0;
   document.querySelectorAll('.fv__line').forEach((line) => {
     const walk = (node) => {
