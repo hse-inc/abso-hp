@@ -2,19 +2,25 @@
   
   --c-base: #ffffff;
   --c-sub: #dbdae2;
+  --c-bg: #f7f6fb;
+  --c-fv-a: #ebeaf1;
+  --c-fv-b: #d3d2dd;
+  --c-band: #a9a8b6;
+  --c-en: #9c9db0;
+  --c-accent-pale: #efe6db;
   --c-sub-deep: #bab9c4;
   --c-sub-ink: #8e8d99;
   --c-sub-ghost: rgba(255, 255, 255, 0.16);
   --c-accent: #b79b72;
   --c-accent-deep: #85693f;
   --c-pale: #f4f3f6;
-  --c-ink: #3d3a44;
-  --c-ink-soft: #6b6874;
+  --c-ink: #4b4d5e;
+  --c-ink-soft: #6e7083;
   --c-line: #e2e0e6;
-  --c-dark: #3d3a44;
-  --c-dark-text: #ffffff;
-  --c-dark-soft: rgba(255, 255, 255, 0.64);
-  --c-dark-ghost: rgba(255, 255, 255, 0.14);
+  --c-dark: #f7f6fb;
+  --c-dark-text: #4b4d5e;
+  --c-dark-soft: #6e7083;
+  --c-dark-ghost: #e2e0e6;
   --c-on-photo: #ffffff;
   --c-shade: rgba(8, 14, 36, 0.62);
   --c-shade-0: rgba(8, 14, 36, 0);
@@ -24,7 +30,7 @@
 
   
   --ff-body: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-  --ff-en: "Cormorant Garamond", "Times New Roman", serif;
+  --ff-en: "Belleza", "Helvetica Neue", Arial, sans-serif;
   --ff-min: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
 
   
@@ -61,6 +67,7 @@
   --c-cream-0: rgba(251, 248, 243, 0);
   --c-cream-35: rgba(251, 248, 243, 0.35);
   --c-cream-90: rgba(251, 248, 243, 0.9);
+  --c-white-35: rgba(255, 255, 255, 0.35);
   --c-white-70: rgba(255, 255, 255, 0.7);
   --c-white-86: rgba(255, 255, 255, 0.86);
   --c-white-94: rgba(255, 255, 255, 0.94);

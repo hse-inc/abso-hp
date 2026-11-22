@@ -63,7 +63,6 @@
       [['--p1', p1], ['--p2', p2], ['--p3', p3], ['--p4', p4]].forEach(([k, v]) => fv.style.setProperty(k, v.toFixed(3)));
       fv.classList.toggle('is-msg', p2 > 0.6 && p3 < 0.4);
       fv.classList.toggle('is-salon', p4 > 0.6);
-      fv.classList.toggle('is-rest', p1 === 0);
       fv.classList.toggle('is-msg-still', p3 === 0);
     };
     window.addEventListener('scroll', () => requestAnimationFrame(tick), { passive: true });
