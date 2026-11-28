@@ -104,11 +104,11 @@
       const run = fv.offsetHeight - stage.offsetHeight;
       const t = run > 0 ? clamp(window.scrollY / run) : 0;
       const p1 = clamp(t / 0.18);
-      const p2 = clamp((t - 0.14) / 0.18);
+      const p2 = clamp((t - 0.12) / 0.3);
       const p3 = clamp((t - 0.5) / 0.12);
       const p4 = clamp((t - 0.6) / 0.16);
       [['--p1', p1], ['--p2', p2], ['--p3', p3], ['--p4', p4]].forEach(([k, v]) => fv.style.setProperty(k, v.toFixed(3)));
-      fv.classList.toggle('is-msg', p2 > 0.6 && p3 < 0.4);
+      fv.classList.toggle('is-msg', p2 > 0.6);
       fv.classList.toggle('is-salon', p4 > 0.6);
       fv.classList.toggle('is-msg-still', p3 === 0);
       fv.classList.toggle('is-rest', p1 === 0);
@@ -118,4 +118,12 @@
     window.addEventListener('scroll', () => requestAnimationFrame(tick), { passive: true });
     tick();
   }
+  document.querySelectorAll('[data-pop]').forEach((b) => {
+    const d = document.getElementById(b.dataset.pop);
+    if (d) b.addEventListener('click', () => { d.showModal(); document.documentElement.classList.add('is-locked'); });
+  });
+  document.querySelectorAll('.pop').forEach((d) => {
+    d.addEventListener('click', (e) => { if (e.target === d || e.target.closest('.pop__close')) d.close(); });
+    d.addEventListener('close', () => document.documentElement.classList.remove('is-locked'));
+  });
 })();
